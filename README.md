@@ -1,1 +1,0 @@
-# 3D-GAN-for-Voxel-based-Shape-Generation
