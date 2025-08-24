@@ -23,13 +23,12 @@ We represent shapes as **voxels** (3D occupancy grids), train GANs to model the 
 
 ## 📸 Results (Visual Progression)
 
-> Put these under `assets/` in your repo (or update the paths below).
 
 **Vanilla GAN — Chair Generation (Epochs 40 → 160)**  
-![Vanilla GAN Chair Progression](assets/vanilla_chair_progression.png)
+![Vanilla GAN Chair Progression](assets/vanilla_results.png)
 
 **WGAN-GP — Chair Generation (Epochs 40 → 160)**  
-![WGAN-GP Chair Progression](assets/wgan_chair_progression.png)
+![WGAN-GP Chair Progression](assets/WGAN_results.png)
 
 ---
 
@@ -41,7 +40,6 @@ We represent shapes as **voxels** (3D occupancy grids), train GANs to model the 
   - Rasterize to an `N×N×N` grid (e.g., `32³` or `64³`).
   - Store as `.npy` for fast loading.
 
-> If you prefer quick starts, you can include a **tiny sample** of voxelized chairs in `data/sample/` so people can test code without a full download.
 
 ---
 
@@ -88,37 +86,7 @@ We represent shapes as **voxels** (3D occupancy grids), train GANs to model the 
 
 For this course project, **voxels** provided a straightforward path to 3D convolutions and GAN training, plus simple **voxel → mesh** conversion via marching cubes for visualization.
 
----
 
-## 🧰 Repository Structure
-
-```
-3d-gan-voxels/
-├─ assets/
-│  ├─ vanilla_chair_progression.png
-│  └─ wgan_chair_progression.png
-├─ data/
-│  └─ shapenet/            # preprocessed voxel data (chairs)
-├─ checkpoints/
-│  ├─ gan/
-│  │  ├─ G_epoch_010.pt
-│  │  ├─ D_epoch_010.pt
-│  │  └─ ...
-│  └─ wgan/
-│     ├─ G_epoch_010.pt
-│     ├─ D_epoch_010.pt
-│     └─ ...
-├─ src/
-│  ├─ datasets.py
-│  ├─ models_gan.py        # Vanilla GAN (G/D with BCE)
-│  ├─ models_wgan.py       # WGAN-GP (G/Critic with GP)
-│  ├─ train_gan.py
-│  ├─ train_wgan.py
-│  ├─ render_voxels.py     # voxel → mesh + visualization
-│  └─ utils.py
-├─ PRESENTATION.pdf        # slides for this project
-└─ README.md
-```
 
 ---
 
@@ -143,12 +111,12 @@ pip install -r requirements.txt
 
 ### Vanilla GAN (BCE + Adam)
 ```bash
-python src/train_gan.py   --data_root data/shapenet/chair_voxels   --epochs 200   --batch_size 64   --save_dir checkpoints/gan   --voxel_res 32
+python src/train_gan.py   --data_root data/shapenet/chair_voxels   --epochs 160   --batch_size 64   --save_dir checkpoints/gan   --voxel_res 32
 ```
 
 ### WGAN-GP
 ```bash
-python src/train_wgan.py   --data_root data/shapenet/chair_voxels   --epochs 200   --batch_size 64   --save_dir checkpoints/wgan   --voxel_res 32   --gp_lambda 10.0   --n_critic 5
+python src/train_wgan.py   --data_root data/shapenet/chair_voxels   --epochs 160   --batch_size 64   --save_dir checkpoints/wgan   --voxel_res 32   --gp_lambda 10.0   --n_critic 5
 ```
 
 - **Checkpoints:** `G_epoch_XXX.pt`, `D_epoch_XXX.pt` saved every **10 epochs**.  
