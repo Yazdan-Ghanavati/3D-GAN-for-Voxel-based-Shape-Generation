@@ -67,11 +67,8 @@ We represent shapes as **voxels** (3D occupancy grids), train GANs to model the 
 ## 🧩 GAN 101 — The Adversarial Game (minimax)
 - **Generator (G):** maps noise \(z \sim p(z)\) to fake samples \(G(z)\) that **fool** the discriminator/critic.  
 - **Discriminator / Critic (D):** scores inputs; high for **real**, low for **fake**.  
-- **Classical minimax (Vanilla GAN):**
-  \[
-  \min_G \max_D\ \mathbb{E}_{x \sim p_{\text{data}}}[\log D(x)]
-  + \mathbb{E}_{z \sim p(z)}[\log(1 - D(G(z)))] .
-  \]
+- **Adversarial setup:** a two-player, zero-sum **minimax** game—G tries to minimize the objective while D tries to maximize it.
+
 - **WGAN idea:** replace the JS divergence game with **Earth Mover (Wasserstein) distance**, optimizing a **1-Lipschitz** critic (with **gradient penalty**).
 
 ---
